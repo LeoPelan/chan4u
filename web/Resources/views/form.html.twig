@@ -1,0 +1,11 @@
+{% extends 'default/index.html.twig' %}
+
+{% block container %}
+  <div class="post"></div>
+  <form method="POST" name="vdm">
+    <input type="text" class="input input-name" placeholder="Name" name="name">
+    <input type="text" class="input input-artiste" placeholder="Artiste" name="artiste">
+    <input type="text" class="input input-genre" placeholder="Genre" name="genre">
+    <input type="submit" value="Send this Song">
+  </form>
+{% endblock %}

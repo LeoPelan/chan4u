@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {% block nav %}
+    <nav>
+      <div>
+        <ul>
+           <li><a href="{{ path('homepage') }}">Accueil</a></li>
+           <li><a href="form">Poster un Contenu</a></li>
+           <li><a href="formupload">Poster une Image</a></li>
+        </ul>
+      </div>
+    </nav>
+  {% endblock %}
+  <div class="container">
+  {% block container %}
+    {% for advert in list %}
+      <h2>Sujet : {{ advert.name }}</h2>
+      <h3>Auteur : {{ advert.artiste }}</h3>
+      <h4>{{ advert.genre }}</h4>
+    {% endfor %}
+    {% for advert in upload %}
+      <h2>Name : {{ advert.name }}</h2>
+      <img src="{{ asset(advert.webPath) }}"/>
+    {% endfor %}
+  {% endblock %}
+  </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+</style>
+{% endblock %}

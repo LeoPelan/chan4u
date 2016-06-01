@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<nav>
+  <div class="navbar navbar-fixed-top">
+    <ul>
+       <li><a href="{{ path('homepage') }}">Accueil</a></li>
+       <li><a href="form">Poster un Contenu</a></li>
+       <li><a href="formupload">Poster une Image</a></li>
+    </ul>
+  </div>
+</nav>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
