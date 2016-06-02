@@ -2,28 +2,39 @@
 
 {% block body %}
   {% block nav %}
-    <nav>
-      <div>
-        <ul>
-           <li><a href="{{ path('homepage') }}">Accueil</a></li>
-           <li><a href="form">Poster un Contenu</a></li>
-           <li><a href="formupload">Poster une Image</a></li>
-        </ul>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a style="width: 150px;" class="navbar-brand" href="{{ path('homepage') }}"><img src="/Resources/img/logoChan4u.png" style="width: 100%;" /></a>
       </div>
+      <ul class="nav navbar-nav">
+      <li class="active"><a href="{{ path('homepage') }}">Accueil</a></li>
+      <li><a href="form">Poster un Article</a></li>
+      <li><a href="formupload">Poster une Image</a></li>
+      </ul>
+    </div>
     </nav>
   {% endblock %}
-  <div class="container">
+</div>
+  <div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
   {% block container %}
     {% for advert in list %}
-      <h2>Sujet : {{ advert.name }}</h2>
-      <h3>Auteur : {{ advert.artiste }}</h3>
-      <h4>{{ advert.genre }}</h4>
+    <div class="panel panel-default">
+    <div class="panel-heading"><h2>{{ advert.name }}</h2> par {{ advert.artiste }}</div>
+    <div class="panel-body">{{ advert.genre }}</div>
+
+      </div>
     {% endfor %}
     {% for advert in upload %}
-      <h2>Name : {{ advert.name }}</h2>
-      <img src="{{ asset(advert.webPath) }}"/>
+    <div class="panel panel-primary">
+    <div class="panel-heading"><h2>{{ advert.name }}</h2></div>
+    <div class="panel-body"><img class="img-thumbnail" src="{{ asset(advert.webPath) }}"/></div>
+    </div>
     {% endfor %}
   {% endblock %}
+  </div>
+  </div>
   </div>
 {% endblock %}
 
