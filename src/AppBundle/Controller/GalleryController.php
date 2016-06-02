@@ -1,19 +1,22 @@
 <?php
-
 namespace AppBundle\Controller;
-
+use AppBundle\Entity\Video;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
+
+class GalleryController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/gallery", name="gallery")
      */
-    public function indexAction(Request $request)
+    public function rateAction(Request $request)
     {
-
       if ($request->getMethod() == 'POST') {
         if (null !== ($request->get('rateup'))) {
           $id_post = $request->get('id_post');
@@ -31,26 +34,21 @@ class DefaultController extends Controller
           ON DUPLICATE KEY UPDATE rate = rate - 1")->execute();
         }
       }
-      $repository = $this
-        ->getDoctrine()
-        ->getManager()
-        ->getRepository('AppBundle:Sound');
-      $repositoryUpload = $this
-        ->getDoctrine()
-        ->getManager()
-        ->getRepository('AppBundle:Video');
       $repositoryLike = $this
         ->getDoctrine()
         ->getManager()
         ->getRepository('AppBundle:Rate');
         $like = $repositoryLike->findAll();
-        $listPosts = $repository->findAll();
-        $listUpload = $repositoryUpload->findAll();
-        return $this->render('default/index.html.twig',
+      $repositoryGallery = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('AppBundle:Video');
+        $gallery = $repositoryGallery->findAll();
+
+        return $this->render("AppBundle::gallerytemplate.html.twig",
         array(
-          "list" => $listPosts,
-          "like" => $like,
-          "upload" => $listUpload)
+          "upload" => $gallery,
+          "like" => $like)
         );
     }
 }

@@ -28,14 +28,19 @@ class FormUploadController extends Controller
          $form->handleRequest($request);
 
          if ($form->isValid()) {
-             $em = $this->getDoctrine()->getManager();
+           $em = $this->getDoctrine()->getManager();
 
+             $ip = $this->container->get('request_stack')->getMasterRequest()->getClientIp();
+             $query = $em->getConnection()->prepare("
+             INSERT INTO `video`(`ip`)
+             VALUES ('".$ip."')");
              $video->upload();
-
+             $video->setIp($ip);
+             $em = $this->getDoctrine()->getManager();
              $em->persist($video);
              $em->flush();
 
-             return $this->redirect("http://127.0.0.1:8000/");
+             return $this->redirect("http://212.47.254.179/");
          }
          return $this->render("AppBundle::uploadtemplate.html.twig",array('form' => $form->createView()));
        }

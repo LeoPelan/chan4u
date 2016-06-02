@@ -11,7 +11,6 @@
       <li class="active"><a href="{{ path('homepage') }}">Accueil</a></li>
       <li><a href="form">Poster un Article</a></li>
       <li><a href="formupload">Poster une Image</a></li>
-      <li><a href="gallery">Gallerie</a></li>
       </ul>
     </div>
     </nav>
@@ -22,36 +21,16 @@
   {% block container %}
     {% for advert in list %}
     <div class="panel panel-default">
-      <div class="panel-heading">
-      <h2>{{ advert.name }}</h2> par {{ advert.artiste }}
+    <div class="panel-heading"><h2>{{ advert.name }}</h2> par {{ advert.artiste }}</div>
+    <div class="panel-body">{{ advert.genre }}</div>
+
       </div>
-      <div class="panel-body">{{ advert.genre }}</div>
-    </div>
     {% endfor %}
     {% for advert in upload %}
     <div class="panel panel-primary">
-      <div class="panel-heading">
-      <h2>{{ advert.name }}</h2>
-      </div>
-    <div class="panel-body">
-      <img class="img-thumbnail" src="{{ asset(advert.webPath) }}"/>
+    <div class="panel-heading"><h2>{{ advert.name }}</h2></div>
+    <div class="panel-body"><img class="img-thumbnail" src="{{ asset(advert.webPath) }}"/></div>
     </div>
-    {% for rate in like %}
-    {% if rate.id_post == advert.id %}
-    <div style="display: inline-flex;" class="container">
-    {{ rate.rate }}
-    <form method="post" name"rateform">
-      <input name="rateup" type="image" src="/Resources/img/rate_up.png" id="rateup" value="rateup" />
-      <input name="ratedown" type="image" src="/Resources/img/rate_down.png" id="ratedown"
-      value="ratedown" />
-      <input name="id_post" style="display:none;" id="id_post"
-      value="{{ advert.id }}" />
-    </form>
-    </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-
     {% endfor %}
   {% endblock %}
   </div>

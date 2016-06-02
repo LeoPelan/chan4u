@@ -8,10 +8,10 @@
         <a style="width: 150px;" class="navbar-brand" href="{{ path('homepage') }}"><img src="/Resources/img/logoChan4u.png" style="width: 100%;" /></a>
       </div>
       <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ path('homepage') }}">Accueil</a></li>
+      <li><a href="{{ path('homepage') }}">Accueil</a></li>
       <li><a href="form">Poster un Article</a></li>
       <li><a href="formupload">Poster une Image</a></li>
-      <li><a href="gallery">Gallerie</a></li>
+      <li class="active"><a href="{{ path('gallery') }}">Gallerie</a></li>
       </ul>
     </div>
     </nav>
@@ -20,26 +20,17 @@
   <div class="row">
   <div class="col-sm-10 col-sm-offset-1">
   {% block container %}
-    {% for advert in list %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-      <h2>{{ advert.name }}</h2> par {{ advert.artiste }}
-      </div>
-      <div class="panel-body">{{ advert.genre }}</div>
-    </div>
-    {% endfor %}
     {% for advert in upload %}
     <div class="panel panel-primary">
-      <div class="panel-heading">
-      <h2>{{ advert.name }}</h2>
-      </div>
-    <div class="panel-body">
-      <img class="img-thumbnail" src="{{ asset(advert.webPath) }}"/>
-    </div>
+    <div class="panel-heading"><h2>{{ advert.name }}</h2></div>
+    <div class="panel-body"><img class="img-thumbnail" src="{{ asset(advert.webPath) }}"/></div>
+
+    <div style="display: inline-flex;" class="container">
     {% for rate in like %}
     {% if rate.id_post == advert.id %}
-    <div style="display: inline-flex;" class="container">
     {{ rate.rate }}
+    {% endif %}
+    {% endfor %}
     <form method="post" name"rateform">
       <input name="rateup" type="image" src="/Resources/img/rate_up.png" id="rateup" value="rateup" />
       <input name="ratedown" type="image" src="/Resources/img/rate_down.png" id="ratedown"
@@ -48,15 +39,14 @@
       value="{{ advert.id }}" />
     </form>
     </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-
+        </div>
     {% endfor %}
   {% endblock %}
   </div>
   </div>
   </div>
+
+
 {% endblock %}
 
 {% block stylesheets %}
